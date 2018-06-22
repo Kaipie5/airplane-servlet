@@ -5,6 +5,7 @@
  */
 package com.stockcharts.airplane.servlet;
 
+import java.util.Comparator;
 import org.apache.log4j.Logger;
 
 /**
@@ -13,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class Airplane {
     
-    private final Logger logger = Logger.getLogger(AirplanesServlet.class.getName());
+    private static Logger logger = Logger.getLogger(AirplanesServlet.class.getName());
     
     private String id;
     private String model;
@@ -99,5 +100,39 @@ public class Airplane {
                 ", latitude=" + latitude + ", longitude=" + longitude + "]";
         return s;
     }
+    
+    public static Comparator<Airplane> NumEngines = new Comparator<Airplane>(){
+        @Override
+        public int compare(Airplane one, Airplane two) {
+            logger.debug("NUM ENGINES COMPARER ENTERED");
+            return Integer.compare(one.numEngines, two.numEngines);
+        }
+    };
+    public static Comparator<Airplane> Speed = new Comparator<Airplane>(){
+        @Override
+        public int compare(Airplane one, Airplane two) {
+            logger.debug("SPEED COMPARER ENTERED");
+            return Integer.compare(one.speed, two.speed);
+        }
+    };
+    public static Comparator<Airplane> Altitude = new Comparator<Airplane>(){
+        @Override
+        public int compare(Airplane one, Airplane two) {
+            logger.debug("ALTITUDE COMPARER ENTERED");
+            return Integer.compare(one.altitude, two.altitude);
+        }
+    };
+    public static Comparator<Airplane> Longitude = new Comparator<Airplane>(){
+        @Override
+        public int compare(Airplane one, Airplane two) {
+            return Float.compare(one.longitude, two.longitude);
+        }
+    };
+    public static Comparator<Airplane> Latitude = new Comparator<Airplane>(){
+        @Override
+        public int compare(Airplane one, Airplane two) {
+            return Float.compare(one.latitude, two.latitude);
+        }
+    };
     
 }
