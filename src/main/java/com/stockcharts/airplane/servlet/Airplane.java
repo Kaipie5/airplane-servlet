@@ -92,6 +92,12 @@ public class Airplane {
         return altitude;
     }
     
-    
+    @Override
+    public String toString() {
+        String s = "[id=" + id + ", Airline=" + airline + ", model=" + model + 
+                ", numEngines=" + numEngines + ", speed=" + speed + ", altitude=" + altitude + 
+                ", latitude=" + latitude + ", longitude=" + longitude + "]";
+        return s;
+    }
     
 }
