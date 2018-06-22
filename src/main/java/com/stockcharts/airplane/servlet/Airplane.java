@@ -15,7 +15,14 @@ public class Airplane {
     
     private final Logger logger = Logger.getLogger(AirplanesServlet.class.getName());
     
-    //private int 
+    private String id;
+    private String model;
+    private float latitude;
+    private float longitude;
+    private int speed;
+    private String airline;
+    private int numEngines;
+    private int altitude;
     
     
 }
