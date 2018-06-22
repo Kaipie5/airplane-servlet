@@ -24,5 +24,41 @@ public class Airplane {
     private int numEngines;
     private int altitude;
     
+    public Airplane() {
+        
+    }
+    public Airplane withID(String id) {
+        this.id = id;
+        return this;
+    }
+    public Airplane withModel(String model) {
+        this.model = model;
+        return this;
+    }
+    public Airplane withLatitude(float latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+    public Airplane withLongitude(float longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+    public Airplane withSpeed(int speed) {
+        this.speed = speed;
+        return this;
+    }
+    public Airplane withAirline(String airline) {
+        this.airline = airline;
+        return this;
+    }
+    public Airplane withNumEngines(int numEngines) {
+        this.numEngines = numEngines;
+        return this;
+    }
+    public Airplane withAltitude(int altitude) {
+        this.altitude = altitude;
+        return this;
+    }
+    
     
 }
