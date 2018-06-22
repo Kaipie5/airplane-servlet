@@ -7,6 +7,8 @@ package com.stockcharts.airplane.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +20,34 @@ import org.apache.log4j.Logger;
  *
  * @author kaimcconnell
  */
-@WebServlet(name = "AirplanesServlet", urlPatterns = {"/AirplanesServlet"})
 public class AirplanesServlet extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(AirplanesServlet.class.getName());
     
+    
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        logger.warn("==================================================");
+        logger.warn("           sample-servlet : init()");
+        logger.warn("==================================================");
+
+        
+        logger.warn("==================================================");
+        logger.warn("       sample-servlet : init() - COMPLETE");
+        logger.warn("==================================================");
+    }
+    
+    @Override
+    public void destroy() {
+        logger.warn("<<<<<<<<<<<<<<<<<<<< ######## >>>>>>>>>>>>>>>>>>>>");
+        logger.warn("           sample-servlet : destroy()");
+        logger.warn("<<<<<<<<<<<<<<<<<<<< ######## >>>>>>>>>>>>>>>>>>>>");
+        
+        logger.warn("<<<<<<<<<<<<<<<<<<<< ######## >>>>>>>>>>>>>>>>>>>>");
+        logger.warn("       sample-servlet : destroy() - COMPLETE");
+        logger.warn("<<<<<<<<<<<<<<<<<<<< ######## >>>>>>>>>>>>>>>>>>>>");
+    }
 
    
     @Override

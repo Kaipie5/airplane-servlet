@@ -5,10 +5,13 @@
  */
 package com.stockcharts.airplane.servlet;
 
+import org.apache.log4j.Logger;
+
 /**
  *
  * @author kaimcconnell
  */
 public class AirplaneDAO {
+    private final Logger logger = Logger.getLogger(AirplanesServlet.class.getName());
     
 }
