@@ -59,6 +59,39 @@ public class Airplane {
         this.altitude = altitude;
         return this;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public int getNumEngines() {
+        return numEngines;
+    }
+
+    public int getAltitude() {
+        return altitude;
+    }
+    
     
     
 }
