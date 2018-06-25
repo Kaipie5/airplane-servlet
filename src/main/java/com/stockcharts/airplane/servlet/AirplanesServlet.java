@@ -5,6 +5,7 @@
  */
 package com.stockcharts.airplane.servlet;
 
+import com.google.common.cache.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -28,7 +29,7 @@ public class AirplanesServlet extends HttpServlet {
     
     public static final String AIRPLANES_URL = "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?fTypQN=";
     
-    //private Cache<String, List<Airplane>> airplaneCache;
+    private Cache<String, List<Airplane>> airplaneCache;
     
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -37,11 +38,11 @@ public class AirplanesServlet extends HttpServlet {
         logger.warn("           sample-servlet : init()");
         logger.warn("==================================================");
 
-//        logger.warn("Setting up Guava Cache...");
-//        airplaneCache = CacheBuilder.newBuilder()
-//                .expireAfterWrite(30, TimeUnit.SECONDS)
-//                .build();
-//        logger.warn("...success");
+        logger.warn("Setting up Guava Cache...");
+        airplaneCache = CacheBuilder.newBuilder()
+                .expireAfterWrite(30, TimeUnit.SECONDS)
+                .build();
+        logger.warn("...success");
         
         logger.warn("==================================================");
         logger.warn("       sample-servlet : init() - COMPLETE");
@@ -64,17 +65,17 @@ public class AirplanesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Airplane> airplanes = new ArrayList<>();
-       //List<Airplane> airplanes = airplaneCache.getIfPresent("all");
+        //List<Airplane> airplanes = new ArrayList<>();
+        List<Airplane> airplanes = airplaneCache.getIfPresent("all");
         
-//        if(airplanes == null) {
-//            try {
-//                airplanes = AirplaneDAO.readAirplanesFromFeed();
-//                //earthquakeCache.put("all", airplanes);
-//            } catch (IOException e) {
-//                logger.error("IO Exception in doGet() while loading all airplanes from feed");
-//            }
-//        }
+        if(airplanes == null) {
+            try {
+                airplanes = AirplaneDAO.readAirplanesFromFeed();
+                airplaneCache.put("all", airplanes);
+            } catch (IOException e) {
+                logger.error("IO Exception in doGet() while loading all airplanes from feed");
+            }
+        }
         
 
         //FROM FEED
