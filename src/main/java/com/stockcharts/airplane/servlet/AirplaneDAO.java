@@ -45,7 +45,7 @@ public class AirplaneDAO {
         try {
             int id = jo.getInt("Id");
         
-            String airline = jo.getString("Op");
+            //String airline = jo.getString("Op");
 
             double latitude = jo.getDouble("Lat");
             double longitude = jo.getDouble("Long");
@@ -61,7 +61,7 @@ public class AirplaneDAO {
 
             Airplane newPlane = new Airplane()
                     .withID(id)
-                    .withAirline(airline)
+                    //.withAirline(airline)
                     .withLatitude(latitude)
                     .withLongitude(longitude)
                     .withSpeed(speed)

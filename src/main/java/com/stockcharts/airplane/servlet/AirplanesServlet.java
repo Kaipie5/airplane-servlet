@@ -130,7 +130,7 @@ public class AirplanesServlet extends HttpServlet {
             response.setHeader("Connection", "close");
             response.setContentType("application/json");
             
-            logger.debug("ARRAY WRITTEN: " + ja.toString());
+            //logger.debug("ARRAY WRITTEN: " + ja.toString());
             
             out.print(ja.toString());
             

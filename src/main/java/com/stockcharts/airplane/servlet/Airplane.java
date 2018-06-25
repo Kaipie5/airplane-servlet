@@ -21,7 +21,7 @@ public class Airplane {
     private double latitude;
     private double longitude;
     private int speed;
-    private String airline;
+    //private String airline;
     private String numEngines;
     private int altitude;
     
@@ -48,10 +48,10 @@ public class Airplane {
         this.speed = speed;
         return this;
     }
-    public Airplane withAirline(String airline) {
-        this.airline = airline;
-        return this;
-    }
+//    public Airplane withAirline(String airline) {
+//        this.airline = airline;
+//        return this;
+//    }
     public Airplane withNumEngines(String numEngines) {
         this.numEngines = numEngines;
         return this;
@@ -81,9 +81,9 @@ public class Airplane {
         return speed;
     }
 
-    public String getAirline() {
-        return airline;
-    }
+//    public String getAirline() {
+//        return airline;
+//    }
 
     public String getNumEngines() {
         return numEngines;
@@ -95,7 +95,7 @@ public class Airplane {
     
     @Override
     public String toString() {
-        String s = "[id=" + id + ", Airline=" + airline + ", model=" + model + 
+        String s = "[id=" + id + ", model=" + model + 
                 ", numEngines=" + numEngines + ", speed=" + speed + ", altitude=" + altitude + 
                 ", latitude=" + latitude + ", longitude=" + longitude + "]";
         return s;
