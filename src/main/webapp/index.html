@@ -2,9 +2,197 @@
 <html>
     <head>
         <title>Start Page</title>
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+         <!-- Maps API KEY AIzaSyDnUM4ZqWUX1-sF1tuiGtMb84u3UxZTIv8 -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnUM4ZqWUX1-sF1tuiGtMb84u3UxZTIv8" defer></script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <style>
+            #map {
+                height : 500px;
+                width : 500px;
+            }
+            
+        </style>
     </head>
     <body>
         <h1>Hello World!</h1>
+        
+        <div id="map"></div>
+        
+        
+        <div id ="app">
+<!--            <button v-on:click="timeLapseEarthquakes()">Time Lapse Earthquakes</button>-->
+            <table>
+<!--                <tr>
+                    <th><button v-on:click="sortEarthquakes('id')">Sort ID</button></th>
+                    <th><button v-on:click="sortEarthquakes('magnitude')">Sort Magnitude</button></th>
+                    <th><button v-on:click="sortEarthquakes('longitude')">Sort Longitude</button></th>
+                    <th><button v-on:click="sortEarthquakes('latitude')">Sort Latitude</button></th>
+                    <th><button v-on:click="sortEarthquakes('time')">Sort Time</button></th>
+                </tr>-->
+                <tr>
+                    <th>id</th>
+                    <th>Airline</th>
+                    <th>model</th>
+                    <th>Number of Engines</th>
+                    <th>longitude</th>
+                    <th>latitude</th>
+                    <th>Altitude</th>
+                    <th>speed</th>
+                </tr>
+                <tr v-for="airplane in airplanes" v-on:click="renderMap(airplane)">
+                    <td> {{ airplane.id }} </td>
+                    <td> {{ airplane.airline }} </td>
+                    <td> {{ airplane.model }} </td>
+                    <td> {{ airplane.numEngines }} </td> 
+                    <td> {{ airplane.longitude }} </td>
+                    <td> {{ airplane.latitude }} </td>
+                    <td> {{ airplane.altitude }} </td>
+                    <td> {{ airplane.speed }} </td>
+                </tr>
+
+
+            </table>
+        </div>
+        
+        
+        
+        
+        
+        <script>
+
+            
+                
+            var app = new Vue({
+              el: '#app',
+              data: {
+                airplanes : [],
+                map : null,
+                marker : null
+              },
+              
+              watch : {
+                  airplanes : function() {
+                      //this.setCoordinates(this.earthquakes[0]);
+                      this.renderMap(this.airplanes[0]);
+                    
+                  }
+              },
+              
+              methods: {
+                  logCoordinates : function(airplane) {
+                      console.log(airplane.latitude + " " + airplane.longitude);
+                  },
+                  renderMap : function(airplane) {
+                        var coordinates = {
+                            lat : airplane.latitude,
+                            lng : airplane.longitude
+                        };
+                      
+                      var map_spec = {
+                            center : coordinates,
+                            mapTypeId : 'terrain',
+                            zoom : 1
+                      };
+                      this.map = new google.maps.Map(document.getElementById('map'), map_spec);
+                  },
+                  renderMarker : function(airplane) {
+                      var coordinates = {
+                            lat : airplane.latitude,
+                            lng : airplane.longitude
+                        };
+                        
+                      var marker_spec = {
+                            position : coordinates,
+                            map : this.map
+                      };
+                      
+                      this.marker = new google.maps.Marker(marker_spec);
+                      
+                      console.log("MARKER RENDERED");
+                  },
+                  sortAirplanes : function(queryString) {
+                      //console.log("sortAirplanes Called with " + queryString);
+                      var url = "servlet" + "?sort=" + queryString;
+                      $.get(url, function(response) {
+                          app.airplanes = response;
+                      });
+                  },
+                  removeMarker : function() {
+                      this.marker.setMap(null);
+                  },
+                  doSetTimeout : function(i, timer) {
+                    setTimeout(this.renderMarker(this.airplanes[i]), timer);
+                 }
+//                  timeLapseAirplanes : function(){
+//                      console.log("time Lapse earthquakes Started...");
+//                      var min = this.earthquakes[0].time;
+//                      var max = 0;
+//                      for (var i = 0; i < this.earthquakes.length; i++) {
+//                          if (min > this.earthquakes[i].time) {
+//                              min = this.earthquakes[i].time;
+//                          }
+//                          if (max < this.earthquakes[i].time) {
+//                              max = this.earthquakes[i].time;
+//                          }
+//                      }
+//                      console.log("MIN " + min);
+//                      console.log("MAX " + max);
+//                      console.log("MILLISECONDS TO CHECK: " + (max-min));
+//                      
+//                      var timer = 0;
+//                      var timeMultiplier = 1000;
+//                      for (var i = 0; i < this.earthquakes.length; i++) {
+//                          //console.log("SHIFTED TIME: " + (this.earthquakes[i].time - min));
+//                          timer = timer + ((this.earthquakes[i].time - min)/timeMultiplier);
+//                          console.log("EARTHQUAKE TIME: " + timer);
+//                          doSetTimeout(i, timer);
+//                      }
+//                      
+//                      //1529000000000
+//
+////                      
+////                      var startPoint = 0;
+////                    for (var timer = min; timer <= max; timer += 10) {
+////                        //console.log("Timer: " + i);
+////                        for (var p = startPoint; p < this.earthquakes.length; p++) {
+////                            console.log("START POINT " + startPoint);
+////                            if (this.earthquakes[p].time <= timer) {
+////                                //console.log("Earthquake Time less than timer")
+////                                this.renderMarker(this.earthquakes[p]);
+////                                console.log("Earthquake Marked");
+////                                startPoint = p+1;
+////                            } else {
+////                                break;
+////                            }
+//////                            if (this.earthquakes[p].time === timer) {
+//////                                this.renderMarker(this.earthquakes[p]);
+//////                                console.log("EARTHQUAKE MARKED")
+//////                                break;
+//////                            }
+////                        }
+////                    }
+//                    //console.log("...Time lapsed earthquakes finished")
+//                  }
+              }
+            });
+                        
+            $.get("airplaneServlet", function(response) {
+                app.airplanes = response;
+                console.log(app.airplanes);
+            });
+            
+
+            
+          
+        </script>
+        
+        
     </body>
 </html>

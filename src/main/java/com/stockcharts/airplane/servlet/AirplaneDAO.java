@@ -40,39 +40,51 @@ public class AirplaneDAO {
     
     private static Airplane getAirplaneFromJSONObject(JSONObject jo) {
         
-        String id = jo.getString("id");
+        logger.debug(jo.toString(4));
         
-        String airline = jo.getString("Op");
+        try {
+            int id = jo.getInt("Id");
         
-        double latitude = jo.getDouble("Lat");
-        double longitude = jo.getDouble("Long");
+            String airline = jo.getString("Op");
+
+            double latitude = jo.getDouble("Lat");
+            double longitude = jo.getDouble("Long");
+
+            int speed = jo.getInt("Spd");
+
+            int altitude = jo.getInt("Alt");
+
+            String model = jo.getString("Mdl");
+
+            String numEngines = jo.getString("Engines");
+
+
+            Airplane newPlane = new Airplane()
+                    .withID(id)
+                    .withAirline(airline)
+                    .withLatitude(latitude)
+                    .withLongitude(longitude)
+                    .withSpeed(speed)
+                    .withAltitude(altitude)
+                    .withModel(model)
+                    .withNumEngines(numEngines);
+            return newPlane;
+        } catch (JSONException e) {
+            logger.error("JSON PARSING EXCEPTION", e);
+        }
+        return null;
         
-        int speed = jo.getInt("Spd");
-        
-        int altitude = jo.getInt("Alt");
-        
-        String model = jo.getString("Mdl");
-        
-        String numEngines = jo.getString("Engines");
-        
-        
-        Airplane newPlane = new Airplane()
-                .withID(id)
-                .withAirline(airline)
-                .withLatitude(latitude)
-                .withLongitude(longitude)
-                .withSpeed(speed)
-                .withAltitude(altitude)
-                .withModel(model)
-                .withNumEngines(numEngines);
-        return newPlane;
     }
     
     private static List<Airplane> getAirplanesFromJSONArray(JSONArray ja) {
         List<Airplane> airplanes = new ArrayList<>();
         for (int i = 0; i < ja.length(); i++) {
             Airplane newPlane = getAirplaneFromJSONObject(ja.getJSONObject(i));
-            airplanes.add(newPlane);
+            if (newPlane == null) {
+                logger.debug("NULL PLANE");
+            } else {
+                airplanes.add(newPlane);
+            }
         }
         return airplanes;
     }

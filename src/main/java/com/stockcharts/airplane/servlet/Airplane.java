@@ -16,7 +16,7 @@ public class Airplane {
     
     private static Logger logger = Logger.getLogger(AirplanesServlet.class.getName());
     
-    private String id;
+    private int id;
     private String model;
     private double latitude;
     private double longitude;
@@ -28,7 +28,7 @@ public class Airplane {
     public Airplane() {
         
     }
-    public Airplane withID(String id) {
+    public Airplane withID(int id) {
         this.id = id;
         return this;
     }
@@ -61,7 +61,7 @@ public class Airplane {
         return this;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
