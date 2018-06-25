@@ -121,7 +121,7 @@ public class AirplanesServlet extends HttpServlet {
 //        Collections.sort(timeSortedEarthquakes, Earthquake.Time);
         
         //JSONArray ja = new JSONArray(earthquakes);
-        JSONArray ja = new JSONArray(timeSortedEarthquakes);
+        JSONArray ja = new JSONArray(airplanes);
         
         logger.debug("Trying to write response to client...");
         try (PrintWriter out = response.getWriter()) {
