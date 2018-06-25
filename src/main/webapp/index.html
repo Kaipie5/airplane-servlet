@@ -38,7 +38,7 @@
                 </tr>-->
                 <tr>
                     <th>id</th>
-                    <th>Airline</th>
+<!--                    <th>Airline</th>-->
                     <th>model</th>
                     <th>Number of Engines</th>
                     <th>longitude</th>
@@ -48,7 +48,7 @@
                 </tr>
                 <tr v-for="airplane in airplanes" v-on:click="renderMap(airplane)">
                     <td> {{ airplane.id }} </td>
-                    <td> {{ airplane.airline }} </td>
+<!--                    <td> {{ airplane.airline }} </td>-->
                     <td> {{ airplane.model }} </td>
                     <td> {{ airplane.numEngines }} </td> 
                     <td> {{ airplane.longitude }} </td>
@@ -81,6 +81,7 @@
                   airplanes : function() {
                       //this.setCoordinates(this.earthquakes[0]);
                       this.renderMap(this.airplanes[0]);
+                      this.renderMarker(this.airplanes()[0]);
                     
                   }
               },
@@ -101,6 +102,7 @@
                             zoom : 1
                       };
                       this.map = new google.maps.Map(document.getElementById('map'), map_spec);
+                      this.renderMarker(airplane);
                   },
                   renderMarker : function(airplane) {
                       var coordinates = {
@@ -183,7 +185,7 @@
               }
             });
                         
-            $.get("airplaneServlet", function(response) {
+            $.get("servlet", function(response) {
                 app.airplanes = response;
                 console.log(app.airplanes);
             });

@@ -40,7 +40,7 @@ public class AirplaneDAO {
     
     private static Airplane getAirplaneFromJSONObject(JSONObject jo) {
         
-        logger.debug(jo.toString(4));
+        //logger.debug(jo.toString(4));
         
         try {
             int id = jo.getInt("Id");

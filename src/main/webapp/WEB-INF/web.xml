@@ -6,7 +6,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AirplanesServlet</servlet-name>
-        <url-pattern>/airplanesServlet</url-pattern>
+        <url-pattern>/servlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
