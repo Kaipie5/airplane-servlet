@@ -24,6 +24,8 @@ public class AirplanesServlet extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(AirplanesServlet.class.getName());
     
+    public static final String AIRPLANES_URL = "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?fTypQN=";
+    
     
     @Override
     public void init(ServletConfig config) throws ServletException {

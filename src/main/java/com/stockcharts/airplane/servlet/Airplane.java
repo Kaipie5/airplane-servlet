@@ -18,11 +18,11 @@ public class Airplane {
     
     private String id;
     private String model;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
     private int speed;
     private String airline;
-    private int numEngines;
+    private String numEngines;
     private int altitude;
     
     public Airplane() {
@@ -36,11 +36,11 @@ public class Airplane {
         this.model = model;
         return this;
     }
-    public Airplane withLatitude(float latitude) {
+    public Airplane withLatitude(double latitude) {
         this.latitude = latitude;
         return this;
     }
-    public Airplane withLongitude(float longitude) {
+    public Airplane withLongitude(double longitude) {
         this.longitude = longitude;
         return this;
     }
@@ -52,7 +52,7 @@ public class Airplane {
         this.airline = airline;
         return this;
     }
-    public Airplane withNumEngines(int numEngines) {
+    public Airplane withNumEngines(String numEngines) {
         this.numEngines = numEngines;
         return this;
     }
@@ -69,11 +69,11 @@ public class Airplane {
         return model;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -85,7 +85,7 @@ public class Airplane {
         return airline;
     }
 
-    public int getNumEngines() {
+    public String getNumEngines() {
         return numEngines;
     }
 
@@ -105,7 +105,7 @@ public class Airplane {
         @Override
         public int compare(Airplane one, Airplane two) {
             logger.debug("NUM ENGINES COMPARER ENTERED");
-            return Integer.compare(one.numEngines, two.numEngines);
+            return Integer.compare(Integer.parseInt(one.numEngines), Integer.parseInt((two.numEngines)));
         }
     };
     public static Comparator<Airplane> Speed = new Comparator<Airplane>(){
@@ -125,13 +125,13 @@ public class Airplane {
     public static Comparator<Airplane> Longitude = new Comparator<Airplane>(){
         @Override
         public int compare(Airplane one, Airplane two) {
-            return Float.compare(one.longitude, two.longitude);
+            return Double.compare(one.longitude, two.longitude);
         }
     };
     public static Comparator<Airplane> Latitude = new Comparator<Airplane>(){
         @Override
         public int compare(Airplane one, Airplane two) {
-            return Float.compare(one.latitude, two.latitude);
+            return Double.compare(one.latitude, two.latitude);
         }
     };
     
