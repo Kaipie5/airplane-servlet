@@ -7,6 +7,7 @@ package com.stockcharts.airplane.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class AirplanesServlet extends HttpServlet {
     
     public static final String AIRPLANES_URL = "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?fTypQN=";
     
+    //private Cache<String, List<Airplane>> airplaneCache;
     
     @Override
     public void init(ServletConfig config) throws ServletException {
