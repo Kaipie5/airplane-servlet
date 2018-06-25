@@ -29,13 +29,15 @@
         <div id ="app">
 <!--            <button v-on:click="timeLapseEarthquakes()">Time Lapse Earthquakes</button>-->
             <table>
-<!--                <tr>
-                    <th><button v-on:click="sortEarthquakes('id')">Sort ID</button></th>
-                    <th><button v-on:click="sortEarthquakes('magnitude')">Sort Magnitude</button></th>
-                    <th><button v-on:click="sortEarthquakes('longitude')">Sort Longitude</button></th>
-                    <th><button v-on:click="sortEarthquakes('latitude')">Sort Latitude</button></th>
-                    <th><button v-on:click="sortEarthquakes('time')">Sort Time</button></th>
-                </tr>-->
+                <tr>
+                    <th><button>SAD</button></th>
+                    <th><button>SAD</button></th>
+                    <th><button v-on:click="sortAirplanes('numEngines')">Sort numEngines</button></th>
+                    <th><button v-on:click="sortAirplanes('longitude')">Sort Longitude</button></th>
+                    <th><button v-on:click="sortAirplanes('latitude')">Sort Latitude</button></th>
+                    <th><button v-on:click="sortAirplanes('altitude')">Sort Altitude</button></th>
+                    <th><button v-on:click="sortAirplanes('speed')">Sort Speed</button></th>
+                </tr>
                 <tr>
                     <th>id</th>
 <!--                    <th>Airline</th>-->
@@ -99,7 +101,7 @@
                       var map_spec = {
                             center : coordinates,
                             mapTypeId : 'terrain',
-                            zoom : 1
+                            zoom : 7
                       };
                       this.map = new google.maps.Map(document.getElementById('map'), map_spec);
                       this.renderMarker(airplane);

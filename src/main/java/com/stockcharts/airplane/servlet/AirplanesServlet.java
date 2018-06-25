@@ -91,32 +91,36 @@ public class AirplanesServlet extends HttpServlet {
         
         
         
-//        String queryVal = request.getParameter("sort");
-//        
-//        if (queryVal == null) {
-//            queryVal = "noSort";
-//        }
-//        switch (queryVal) {
-//            case "time" :
-//                logger.debug("TIME SORT");
-//                Collections.sort(airplanes, Airplane.Time);
-//                break;
-//            case "magnitude" :
-//                logger.debug("MAGNITUDE SORT");
-//                Collections.sort(airplanes, Earthquake.Magnitude);
-//                break;
-//            case "latitude" :
-//                logger.debug("Latitude SORT");
-//                Collections.sort(earthquakes, Earthquake.Latitude);
-//                break;
-//            case "longitude" :
-//                logger.debug("Longitude SORT");
-//                Collections.sort(earthquakes, Earthquake.Longitude);
-//                break;
-//            default :
-//                logger.debug("NO SORT");
-//                break;
-//        }
+        String queryVal = request.getParameter("sort");
+        
+        if (queryVal == null) {
+            queryVal = "noSort";
+        }
+        switch (queryVal) {
+            case "speed" :
+                logger.debug("SPEED SORT");
+                Collections.sort(airplanes, Airplane.Speed);
+                break;
+            case "magnitude" :
+                logger.debug("NUMBER OF ENGINES SORT");
+                Collections.sort(airplanes, Airplane.NumEngines);
+                break;
+            case "latitude" :
+                logger.debug("Latitude SORT");
+                Collections.sort(airplanes, Airplane.Latitude);
+                break;
+            case "longitude" :
+                logger.debug("Longitude SORT");
+                Collections.sort(airplanes, Airplane.Longitude);
+                break;
+            case "altitude" :
+                logger.debug("Longitude SORT");
+                Collections.sort(airplanes, Airplane.Altitude);
+            break;
+            default :
+                logger.debug("NO SORT");
+                break;
+        }
 //        
 //        List<Earthquake> timeSortedEarthquakes = earthquakes;
 //        Collections.sort(timeSortedEarthquakes, Earthquake.Time);
