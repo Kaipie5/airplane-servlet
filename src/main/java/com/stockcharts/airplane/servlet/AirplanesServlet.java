@@ -36,6 +36,11 @@ public class AirplanesServlet extends HttpServlet {
         logger.warn("           sample-servlet : init()");
         logger.warn("==================================================");
 
+//        logger.warn("Setting up Guava Cache...");
+//        airplaneCache = CacheBuilder.newBuilder()
+//                .expireAfterWrite(30, TimeUnit.SECONDS)
+//                .build();
+//        logger.warn("...success");
         
         logger.warn("==================================================");
         logger.warn("       sample-servlet : init() - COMPLETE");
