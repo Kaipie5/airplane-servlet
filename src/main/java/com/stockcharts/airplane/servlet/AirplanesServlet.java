@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
 
 /**
  *
@@ -62,7 +63,82 @@ public class AirplanesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        
+        List<Airplane> airplanes = new ArrayList<>();
+       //List<Airplane> airplanes = airplaneCache.getIfPresent("all");
+        
+//        if(airplanes == null) {
+//            try {
+//                airplanes = AirplaneDAO.readAirplanesFromFeed();
+//                //earthquakeCache.put("all", airplanes);
+//            } catch (IOException e) {
+//                logger.error("IO Exception in doGet() while loading all airplanes from feed");
+//            }
+//        }
+        
+
+        //FROM FEED
+        logger.debug("Trying to get Airplanes from feed...");
+        try {
+            airplanes = AirplaneDAO.readAirplanesFromFeed();
+        } catch (IOException e) {
+            logger.error("AirplaneDAO readAirplanesFromFeed IOException", e);
+        }
+        logger.debug("...Airplanes gotten from Feed");
+        
+        
+        
+        
+        
+//        String queryVal = request.getParameter("sort");
+//        
+//        if (queryVal == null) {
+//            queryVal = "noSort";
+//        }
+//        switch (queryVal) {
+//            case "time" :
+//                logger.debug("TIME SORT");
+//                Collections.sort(airplanes, Airplane.Time);
+//                break;
+//            case "magnitude" :
+//                logger.debug("MAGNITUDE SORT");
+//                Collections.sort(airplanes, Earthquake.Magnitude);
+//                break;
+//            case "latitude" :
+//                logger.debug("Latitude SORT");
+//                Collections.sort(earthquakes, Earthquake.Latitude);
+//                break;
+//            case "longitude" :
+//                logger.debug("Longitude SORT");
+//                Collections.sort(earthquakes, Earthquake.Longitude);
+//                break;
+//            default :
+//                logger.debug("NO SORT");
+//                break;
+//        }
+//        
+//        List<Earthquake> timeSortedEarthquakes = earthquakes;
+//        Collections.sort(timeSortedEarthquakes, Earthquake.Time);
+        
+        //JSONArray ja = new JSONArray(earthquakes);
+        JSONArray ja = new JSONArray(timeSortedEarthquakes);
+        
+        logger.debug("Trying to write response to client...");
+        try (PrintWriter out = response.getWriter()) {
+            
+            response.setHeader("Connection", "close");
+            response.setContentType("application/json");
+            
+            logger.debug("ARRAY WRITTEN: " + ja.toString());
+            
+            out.print(ja.toString());
+            
+            out.flush();
+            
+        } catch (IOException e) {
+            logger.error("ERROR Writing Response To Client", e);
+        }
+        logger.debug("...Response written to client");
     }
 
     
